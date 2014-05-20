@@ -56,14 +56,14 @@ Alien.prototype.draw = function(canvas) {
 
 Alien.prototype.die = function() {
   GameAudio.play('die');
-  this.flock.speed += 1;
+  this.flock.speed += 1; /*Each time an alien dies, this controls how much faster they move*/
   this.board.remove(this);
 }
 
 Alien.prototype.step = function(dt) {
   this.mx += dt * this.flock.dx;
   this.y += this.flock.dy;
-  if(Math.abs(this.mx) > 10) {
+  if(Math.abs(this.mx) > 5) /*controls how fast the alien frames begin*/ {
     if(this.y == this.flock.max_y[this.x]) {
       this.fireSometimes();
     }
