@@ -3,7 +3,7 @@ var AlienFlock = function AlienFlock() {
   this.invulnrable = true;
   this.dx = 10; this.dy = 0;
   this.hit = 1; this.lastHit = 0;
-  this.speed = 10;
+  this.speed = 10; /* controls speed of enemy attacking and moving*/
 
   this.draw = function() {};
 
@@ -99,22 +99,23 @@ Player.prototype.die = function() {
 }
 /* this bit is the control of left and right it gets its values from level.js */
 Player.prototype.step = function(dt) {
-  if(Game.keys['left']) { this.x -= 100 * dt; }
-  if(Game.keys['right']) { this.x += 100 * dt; }
+  if(Game.keys['left']) { this.x -= 500 * dt; } /*controls speed of player moving*/
+  if(Game.keys['right']) { this.x += 500 * dt; }
 
   if(this.x < 0) this.x = 0;
   if(this.x > Game.width-this.w) this.x = Game.width-this.w;
 
   this.reloading--;
-
-  if(Game.keys['fire'] && this.reloading <= 0 && this.board.missiles < 3) {
+    /*How many missiles to shoot*/
+  if(Game.keys['fire'] && this.reloading <= 0 && this.board.missiles < 100) {
     GameAudio.play('fire');
     this.board.addSprite('missile',
                           this.x + this.w/2 - Sprites.map.missile.w/2,
                           this.y-this.h,
                           { dy: -100, player: true });
     this.board.missiles++;
-    this.reloading = 10;
+    /*lower the number, the faster the reload*/
+    this.reloading = 5;
   }
   return true;
 }
