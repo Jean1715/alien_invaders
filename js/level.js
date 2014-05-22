@@ -24,8 +24,8 @@
           [0,0,1,1,1,1,1,1,1,1,0]] };
 /* coordinates of sprite sheets or alien characters. Use frames to make an alien move more through sprite sheet*/
   var spriteData = {
-    'alien1': { sx: 0,  sy: 0,  w: 23, h: 18, cls: Alien, frames: 2 },
-    'alien2': { sx: 0,  sy: 18, w: 23, h: 18, cls: Alien, frames: 2 },
+    'alien1': { sx: 0,  sy: 0,  w: 24, h: 27, cls: Alien, frames: 2 },
+    'alien2': { sx: 0,  sy: 192, w: 23, h: 18, cls: Alien, frames: 2 },
     'player': { sx: 0,  sy: 91, w: 77, h: 64, cls: Player },
     'missile': { sx: 0,  sy: 47, w: 7,  h: 31, cls: Missile },
     'missile2': { sx: 0,  sy: 177, w: 3,  h: 15, cls: Missile2 }
