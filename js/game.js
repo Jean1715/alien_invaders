@@ -78,7 +78,7 @@ Alien.prototype.step = function(dt) {
 
 Alien.prototype.fireSometimes = function() {
       if(Math.random()*100 < 10) /*How often aliens fire*/ { 
-        this.board.addSprite('missile',this.x + this.w/2 - Sprites.map.missile.w/2,
+        this.board.addSprite('missile2',this.x + this.w/2 - Sprites.map.missile2.w/2,
                                       this.y + this.h, 
                                      { dy: 100 });
       }
@@ -99,7 +99,7 @@ Player.prototype.die = function() {
 }
 /* this bit is the control of left and right it gets its values from level.js */
 Player.prototype.step = function(dt) {
-  if(Game.keys['left']) { this.x -= 500 * dt; } /*controls speed of player moving*/
+  if(Game.keys['left']) { this.x -= 500 * dt; } /*controls speedmiss of player moving*/
   if(Game.keys['right']) { this.x += 500 * dt; }
 
   if(this.x < 0) this.x = 0;
@@ -116,7 +116,7 @@ Player.prototype.step = function(dt) {
     this.board.missiles++;
     /*lower the number, the faster the reload*/
     this.reloading = 5;
-  }
+  } 
   return true;
 }
 
@@ -130,6 +130,7 @@ Missile.prototype.draw = function(canvas) {
    Sprites.draw(canvas,'missile',this.x,this.y);
 }
 
+
 Missile.prototype.step = function(dt) {
    this.y += this.dy * dt;
 
@@ -142,6 +143,33 @@ Missile.prototype.step = function(dt) {
 }
 
 Missile.prototype.die = function() {
+  if(this.player) this.board.missiles--;
+  if(this.board.missiles < 0) this.board.missiles=0;
+   this.board.remove(this);
+}
+
+var Missile2 = function Missile2(opts) {
+   this.dy = opts.dy;
+   this.player = opts.player;
+}
+
+Missile2.prototype.draw = function(canvas) {
+   Sprites.draw(canvas,'missile2',this.x,this.y);
+}
+
+
+Missile2.prototype.step = function(dt) {
+   this.y += this.dy * dt;
+
+   var enemy = this.board.collide(this);
+   if(enemy) { 
+     enemy.die();
+     return false;
+   }
+   return (this.y < 0 || this.y > Game.height) ? false : true;
+}
+
+Missile2.prototype.die = function() {
   if(this.player) this.board.missiles--;
   if(this.board.missiles < 0) this.board.missiles=0;
    this.board.remove(this);
