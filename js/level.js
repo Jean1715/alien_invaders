@@ -26,12 +26,13 @@
   var spriteData = {
     'alien1': { sx: 0,  sy: 0,  w: 23, h: 18, cls: Alien, frames: 2 },
     'alien2': { sx: 0,  sy: 18, w: 23, h: 18, cls: Alien, frames: 2 },
-    'player': { sx: 0,  sy: 36, w: 26, h: 17, cls: Player },
-    'missile': { sx: 0,  sy: 86, w: 3,  h: 14, cls: Missile }
+    'player': { sx: 0,  sy: 91, w: 77, h: 64, cls: Player },
+    'missile': { sx: 0,  sy: 47, w: 7,  h: 31, cls: Missile }
+    /*'missile2': { sx: 0,  sy: 177, w: 3,  h: 15, cls: Missile2 } */ 
   }
 
   function startGame() {
-    var screen = new GameScreen("Alien Invaders","press space to start",
+    var screen = new GameScreen("Space Archer","press space to start",
                                  function() {
                                      Game.loadBoard(new GameBoard(1));
                                  });
