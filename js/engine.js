@@ -1,5 +1,6 @@
+/* controls what keys to press for the left, right, and fire functions*/
 var Game = new function() {                                                                  
-  var KEY_CODES = { 37:'left', 39:'right', 32 :'fire' };
+  var KEY_CODES = { 37:'left', 39:'right', 32 :'fire', 13: 'enter'};
   this.keys = {};
 
   this.initialize = function(canvas_dom,level_data,sprite_data,callbacks) {
@@ -49,7 +50,7 @@ var Sprites = new function() {
 
 var GameScreen = function GameScreen(text,text2,callback) {
   this.step = function(dt) {
-    if(Game.keys['fire'] && callback) callback();
+    if(Game.keys['enter'] && callback) callback();
   };
 
   this.render = function(canvas) {
